@@ -1,31 +1,30 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "./features/user/userSlice";
-
+import About from "./pages/About";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 function App() {
-  const dispatch = useDispatch();
-  const { users, loading, error } = useSelector((state) => state.users);
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
-
-  if (loading) {
-    return <h1 className="text-3xl text-black ">loading...</h1>;
-  }
-
-  if (error) {
-    return <h1 className="text-3xl text-red-500 ">Error</h1>;
-  }
-
   return (
-    <div className="min-h-svh flex flex-col justify-center items-center ">
-      <h1 className="text-3xl text-red-500 ">Users</h1>
-      {users.map((user) => (
-        <h1 key={user.id} className="text-3xl text-red-500 ">
-          {user.name}
-        </h1>
-      ))}
+    <div>
+      <BrowserRouter>
+        <nav className="bg-gray-900 p-4 text-center">
+          <Link to="/" className="text-white px-4 hover:text-gray-400">
+            {" "}
+            Home{" "}
+          </Link>
+          <Link to="/about" className="text-white px-4 hover:text-gray-400">
+            {" "}
+            About Us{" "}
+          </Link>
+        </nav>
+        <div className="mt-10">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+        
+      </BrowserRouter>
     </div>
   );
 }

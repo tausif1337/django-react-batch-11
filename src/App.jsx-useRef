@@ -1,0 +1,34 @@
+import { useRef } from "react";
+
+function App() {
+  const inputRef = useRef(null);
+  const divRef = useRef(null);
+
+  function focusInput() {
+    // alert("Hi Tausif")
+    inputRef.current.focus();
+    inputRef.current.value = "Tausif";
+    divRef.current.style.backgroundColor = "blue";
+    divRef.current.style.color = "white";
+    divRef.current.style.height = "200px";
+    // divRef.current.style.width = "200px"
+  }
+
+  return (
+    <div
+      ref={divRef}
+      className="flex items-center justify-center h-screen gap-3"
+    >
+      <input
+        ref={inputRef}
+        className="border bg-red-500 w-32"
+        placeholder="Enter Name"
+      />
+
+      <button className="border bg-green-500" onClick={focusInput}>
+        Focus Input
+      </button>
+    </div>
+  );
+}
+export default App;
